@@ -4,12 +4,12 @@ Import(ROOT + "Zip/zip.js");
 
 
 function Import(file) {
-    try {
-        //source:http://www.forosdelweb.com/f13/importar-archivo-js-dentro-javascript-387358/
-        document.write('<script language=\"JavaScript\" type=\"text/JavaScript\" src=' + file + '></script>');
-    } catch {} //ya se ha importado
-}
 
+    //source:http://www.forosdelweb.com/f13/importar-archivo-js-dentro-javascript-387358/
+    if (!document.contains(file))
+        document.write('<script language=\"JavaScript\" type=\"text/JavaScript\" src=' + file + '></script>');
+
+}
 
 
 class ZipUtils {
