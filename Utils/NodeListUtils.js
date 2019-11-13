@@ -1,8 +1,10 @@
 Import(ROOT + "Utils/ArrayUtils.js");
 
 function Import(file) {
-    //source:http://www.forosdelweb.com/f13/importar-archivo-js-dentro-javascript-387358/
-    document.write('<script language=\"JavaScript\" type=\"text/JavaScript\" src=' + file + '></script>');
+    try {
+        //source:http://www.forosdelweb.com/f13/importar-archivo-js-dentro-javascript-387358/
+        document.write('<script language=\"JavaScript\" type=\"text/JavaScript\" src=' + file + '></script>');
+    } catch {} //ya se ha importado
 }
 class NodeListUtils {
 
