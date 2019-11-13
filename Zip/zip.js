@@ -1,8 +1,3 @@
-const USER = "tetradogpwa";
-const ROOT = USER + ".github.io/Utils/";
-
-
-
 /*
  Copyright (c) 2013 Gildas Lormeau. All rights reserved.
 
