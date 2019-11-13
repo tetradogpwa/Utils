@@ -1,6 +1,4 @@
 //import
-const USER = "tetradogpwa";
-const ROOT = USER + ".github.io/Utils/";
 Import(ROOT + "Utils/CacheUtils.js");
 Import(ROOT + "Utils/StringUtils.js");
 Import(ROOT + "Utils/ArrayUtils.js");

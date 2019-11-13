@@ -1,5 +1,5 @@
 const USER = "tetradogpwa";
-const ROOT = USER + ".github.io/Utils/Zip/";
+const ROOT = USER + ".github.io/Utils/";
 
 
 
@@ -894,8 +894,8 @@ const ROOT = USER + ".github.io/Utils/Zip/";
     }
 
     var DEFAULT_WORKER_SCRIPTS = {
-        deflater: [ROOT + 'z-worker.js', ROOT + 'deflate.js'],
-        inflater: [ROOT + 'z-worker.js', ROOT + 'inflate.js']
+        deflater: ["Zip/" + 'z-worker.js', "Zip/" + 'deflate.js'],
+        inflater: ["Zip/" + 'z-worker.js', "Zip/" + 'inflate.js']
     };
 
     function createWorker(type, callback, onerror) {

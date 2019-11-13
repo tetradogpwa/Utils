@@ -1,6 +1,3 @@
-const USER = "tetradogpwa";
-const ROOT = USER + ".github.io/Utils/";
-
 Import(ROOT + "Utils/ArrayUtils.js");
 
 function Import(file) {
