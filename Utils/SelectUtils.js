@@ -2,13 +2,16 @@ Import(ROOT + "Utils/ArrayUtils.js");
 Import(ROOT + "Utils/NodeListUtils.js");
 
 function Import(file) {
-    var node = '<script language=\"JavaScript\" type=\"text/JavaScript\" src=' + file + '></script>';
+    var scriptNode = document.createElement("script");
+    scriptNode.setAttribute("language", "JavaScript");
+    scriptNode.setAttribute("type", "text/JavaScript");
+    scriptNode.setAttribute("src", file);
+
     //source:http://www.forosdelweb.com/f13/importar-archivo-js-dentro-javascript-387358/
-    if (!document.contains(node))
-        document.write(node);
+    if (!document.contains(scriptNode))
+        document.write(scriptNode.outerHTML);
 
 }
-
 class SelectUtils {
     static SelectedIndex(select) {
         return select.selectedIndex;
