@@ -1,5 +1,10 @@
-Import("zip.js");
-Import("ArrayUtils.js");
+const USER = "tetradogpwa";
+const ROOT = USER + ".github.io/Utils/";
+
+Import(ROOT + "Utils/ArrayUtils.js");
+Import(ROOT + "Zip/zip.js");
+
+
 
 
 function Import(file) {

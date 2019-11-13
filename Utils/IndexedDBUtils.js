@@ -1,4 +1,8 @@
-Import("ArrayUtils.js");
+const USER = "tetradogpwa";
+const ROOT = USER + ".github.io/Utils/";
+
+Import(ROOT + "Utils/ArrayUtils.js");
+
 
 function Import(file) {
     //source:http://www.forosdelweb.com/f13/importar-archivo-js-dentro-javascript-387358/
@@ -145,16 +149,16 @@ class IndexedDBUtils {
                     promesa = new Promise((okey, error) => okey());
                 }
                 promesa.then(() => {
-                    //añado o elimino
+                    //aï¿½ado o elimino
                     metodoAddOrRemove(objToSave, nameBD);
                     okey([obj, nameBD]);
                 }).catch(error);
             });
-            //añado la promsea a la lista de promesas
+            //aï¿½ado la promsea a la lista de promesas
             if (!bd._promises)
                 bd._promises = [];
 
-            //mirar forma de añadir objeto
+            //mirar forma de aï¿½adir objeto
             //ArrayUtils.Add(bd._promises,this);  
 
 

@@ -1,6 +1,8 @@
+const USER = "tetradogpwa";
+const ROOT = USER + ".github.io/Utils/";
 
-Import("ArrayUtils.js");
-Import("NodeListUtils.js");
+Import(ROOT + "Utils/ArrayUtils.js");
+Import(ROOT + "Utils/NodeListUtils.js");
 
 function Import(file) {
     //source:http://www.forosdelweb.com/f13/importar-archivo-js-dentro-javascript-387358/

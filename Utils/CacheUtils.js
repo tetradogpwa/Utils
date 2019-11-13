@@ -1,6 +1,8 @@
+const USER = "tetradogpwa";
+const ROOT = USER + ".github.io/Utils/";
 
-Import("ArrayUtils.js");
-Import("ByteArrayUtils.js");
+Import(ROOT + "Utils/ArrayUtils.js");
+Import(ROOT + "Utils/ByteArrayUtils.js");
 
 function Import(file) {
     //source:http://www.forosdelweb.com/f13/importar-archivo-js-dentro-javascript-387358/
@@ -31,7 +33,7 @@ class CacheUtils {
     static SetString(nombreCache, key, string, typeData = "text/plain") {
             return CacheUtils.Set(nombreCache, key, string instanceof Response ? string : new Response(string, { headers: { "Content-Type": typeData } }));
         }
-        //hacer más tipos :D
+        //hacer mï¿½s tipos :D
     static Get(nombreCache, key) {
 
         return caches.open(nombreCache).then(cache => {
