@@ -1,13 +1,12 @@
 Import(ROOT + "Utils/ArrayUtils.js");
 
 function Import(file) {
-
+    var node = '<script language=\"JavaScript\" type=\"text/JavaScript\" src=' + file + '></script>';
     //source:http://www.forosdelweb.com/f13/importar-archivo-js-dentro-javascript-387358/
-    if (!document.contains(file))
-        document.write('<script language=\"JavaScript\" type=\"text/JavaScript\" src=' + file + '></script>');
+    if (!document.contains(node))
+        document.write(node);
 
 }
-
 
 class IndexedDBUtils {
 
