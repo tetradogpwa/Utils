@@ -1,4 +1,4 @@
-self.importScripts(ROOT + "Utils/ArrayUtils.js");
+window.Import(ROOT + "Utils/ArrayUtils.js");
 
 
 class StringUtils {

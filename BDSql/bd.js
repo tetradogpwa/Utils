@@ -1,9 +1,9 @@
 //import
-self.importScripts(ROOT + "Utils/CacheUtils.js");
-self.importScripts(ROOT + "Utils/StringUtils.js");
-self.importScripts(ROOT + "Utils/ArrayUtils.js");
-self.importScripts(ROOT + "BDSql/sql-wasm.js");
-self.importScripts(ROOT + "Utils/ZipUtils.js");
+window.Import(ROOT + "Utils/CacheUtils.js");
+window.Import(ROOT + "Utils/StringUtils.js");
+window.Import(ROOT + "Utils/ArrayUtils.js");
+window.Import(ROOT + "BDSql/sql-wasm.js");
+window.Import(ROOT + "Utils/ZipUtils.js");
 
 
 

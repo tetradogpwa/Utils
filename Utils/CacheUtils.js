@@ -1,5 +1,5 @@
-self.importScripts(ROOT + "Utils/ArrayUtils.js");
-self.importScripts(ROOT + "Utils/ByteArrayUtils.js");
+window.Import(ROOT + "Utils/ArrayUtils.js");
+window.Import(ROOT + "Utils/ByteArrayUtils.js");
 
 
 class CacheUtils {

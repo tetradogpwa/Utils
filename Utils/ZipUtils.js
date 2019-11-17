@@ -1,5 +1,5 @@
-self.importScripts(ROOT + "Utils/ArrayUtils.js");
-self.importScripts(ROOT + "Zip/zip.js");
+window.Import(ROOT + "Utils/ArrayUtils.js");
+window.Import(ROOT + "Zip/zip.js");
 
 
 
