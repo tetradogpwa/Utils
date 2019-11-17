@@ -1,23 +1,13 @@
 //import
-Import(ROOT + "Utils/CacheUtils.js");
-Import(ROOT + "Utils/StringUtils.js");
-Import(ROOT + "Utils/ArrayUtils.js");
-Import(ROOT + "BDSql/sql-wasm.js");
-Import(ROOT + "Utils/ZipUtils.js");
+self.importScripts(ROOT + "Utils/CacheUtils.js");
+self.importScripts(ROOT + "Utils/StringUtils.js");
+self.importScripts(ROOT + "Utils/ArrayUtils.js");
+self.importScripts(ROOT + "BDSql/sql-wasm.js");
+self.importScripts(ROOT + "Utils/ZipUtils.js");
 
 
 
-function Import(file) {
-    var scriptNode = document.createElement("script");
-    scriptNode.setAttribute("language", "JavaScript");
-    scriptNode.setAttribute("type", "text/JavaScript");
-    scriptNode.setAttribute("src", file);
 
-    //source:http://www.forosdelweb.com/f13/importar-archivo-js-dentro-javascript-387358/
-    if (!document.head.outerHTML.includes(scriptNode.outerHTML))
-        document.write(scriptNode.outerHTML);
-
-}
 class BD {
 
 
