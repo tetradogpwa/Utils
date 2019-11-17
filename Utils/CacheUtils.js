@@ -1,17 +1,7 @@
-Import(ROOT + "Utils/ArrayUtils.js");
-Import(ROOT + "Utils/ByteArrayUtils.js");
+self.importScripts(ROOT + "Utils/ArrayUtils.js");
+self.importScripts(ROOT + "Utils/ByteArrayUtils.js");
 
-function Import(file) {
-    var scriptNode = document.createElement("script");
-    scriptNode.setAttribute("language", "JavaScript");
-    scriptNode.setAttribute("type", "text/JavaScript");
-    scriptNode.setAttribute("src", file);
 
-    //source:http://www.forosdelweb.com/f13/importar-archivo-js-dentro-javascript-387358/
-    if (!document.head.outerHTML.includes(scriptNode.outerHTML))
-        document.write(scriptNode.outerHTML);
-
-}
 class CacheUtils {
 
     static Set(nombreCache, key, value) {
