@@ -777,7 +777,7 @@ var initSqlJs = function(moduleConfig) {
             f.preloadedAudios = {};
 
             function hb() { var a = I; return String.prototype.startsWith ? a.startsWith("data:application/octet-stream;base64,") : 0 === a.indexOf("data:application/octet-stream;base64,") }
-            var I = ROOT + "BDSql/sql-wasm.wasm";
+            var I = window._ROOTUTILS + "BDSql/sql-wasm.wasm";
             if (!hb()) {
                 var jb = I;
                 I = f.locateFile ? f.locateFile(jb, A) : A + jb
