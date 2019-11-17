@@ -1,4 +1,4 @@
-window.Import(ROOT + "Utils/ArrayUtils.js");
+window.Import(window._ROOTUTILS + "Utils/ArrayUtils.js");
 
 
 class IndexedDBUtils {

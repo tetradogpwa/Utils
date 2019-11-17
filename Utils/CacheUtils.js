@@ -1,5 +1,5 @@
-window.Import(ROOT + "Utils/ArrayUtils.js");
-window.Import(ROOT + "Utils/ByteArrayUtils.js");
+window.Import(window._ROOTUTILS + "Utils/ArrayUtils.js");
+window.Import(window._ROOTUTILS + "Utils/ByteArrayUtils.js");
 
 
 class CacheUtils {

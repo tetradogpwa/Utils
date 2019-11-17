@@ -1,5 +1,5 @@
-window.Import(ROOT + "Utils/ArrayUtils.js");
-window.Import(ROOT + "Utils/NodeListUtils.js");
+window.Import(window._ROOTUTILS + "Utils/ArrayUtils.js");
+window.Import(window._ROOTUTILS + "Utils/NodeListUtils.js");
 
 
 class SelectUtils {
