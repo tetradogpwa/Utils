@@ -27,8 +27,8 @@ window.onload = () => {
     Assert.Methods = [
 
         [ArrayUtils, "Root", TestArrayUtilsRootMethod],
-        [ArrayUtils, "IndexOf", TestArrayUtilsIndexOfMethod]
-
+        [ArrayUtils, "IndexOf1", TestArrayUtilsIndexOfMethod]
+        [ArrayUtils, "IndexOf1", TestArrayUtilsIndexOfMethod]
 
 
 
@@ -57,7 +57,7 @@ function TestArrayUtilsIndexOfMethod() {
     const VALUETOFIND = 5;
     const INDEX = 4;
 
-    var array = [1, 2, 3, 4, 5, 6];
+    var array = [1, 2, 3, 4, 4, 5, 6];
 
     if (ArrayUtils.IndexOf(array, VALUETOFIND) !== INDEX)
         throw "No se ha encontrado!";
