@@ -27,7 +27,7 @@ window.onload = () => {
     Assert.Methods = [
 
         [ArrayUtils, "Root", TestArrayUtilsRootMethod],
-        [ArrayUtils, "IndexOf", TestArrayUtilsIndexOfMethod]
+        [ArrayUtils, "IndexOf1", TestArrayUtilsIndexOfMethod]
 
 
 
