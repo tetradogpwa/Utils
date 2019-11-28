@@ -14,7 +14,7 @@ class ReflectionUtils {
 
     static ExistFunction(clase, method) {
 
-        var exist = true; /*temporal*/
+        var exist = clase[method] !== undefined; /*temporal*/
 
 
         /*Miro si existe*/
