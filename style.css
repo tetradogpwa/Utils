@@ -1,11 +1,11 @@
 .success {
-    background-color: green;
+    background-color: lightgreen;
 }
 
 .error {
-    background-color: red;
+    background-color: lightsalmon;
 }
 
 .obsolete {
-    background-color: gray;
+    background-color: lightsteelblue;
 }

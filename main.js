@@ -23,7 +23,6 @@ window.Import(window._ROOTUNITTESTJS + "Assert.js");
 window.Import(window._ROOTUTILS + "Utils/ArrayUtils.js");
 
 window.onload = () => {
-    var lstTest = document.getElementById("lstTest");
 
     Assert.Methods = [
 
@@ -35,37 +34,12 @@ window.onload = () => {
 
     ];
 
-    Assert.OnSuccess = (clase, func, testMethod, posTest) => {
-        var method = new clase().constructor.name + "." + func;
-        lstTest.appendChild(GetAssertChildList(method, "success", testMethod));
-    };
-    Assert.OnError = (clase, func, testMethod, error, posTest) => {
-        var method = new clase().constructor.name + "." + func;
-        lstTest.appendChild(GetAssertChildList(method, "error", testMethod, error));
-    };
-    Assert.OnObsolete = (clase, func) => {
-        var method = new clase().constructor.name + "." + func;
 
-        if (!window._dicObosolete)
-            window._dicObosolete = new Map();
-        if (!window._dicObosolete.has(method)) {
-            window._dicObosolete.set(method, method);
-            lstTest.appendChild(GetAssertChildList(method, "obsolete"));
-        }
-
-    };
-
-    Assert.Init();
+    Assert.Init(document.getElementById("lstTest"));
 
 };
 
-function GetAssertChildList(nameMethod, classType, testMethod = "", error = "") {
 
-    var scriptNode = document.createElement("li");
-    scriptNode.setAttribute("class", classType);
-    scriptNode.innerText = nameMethod + " " + ReflectionUtils.GetFunctionName(testMethod) + " " + error;
-    return scriptNode;
-}
 
 function TestArrayUtilsRootMethod() {
     var arrayAnidada = [
