@@ -1,27 +1,27 @@
-class ReflectionUtils{
+class ReflectionUtils {
 
 
-/*source: https://es.stackoverflow.com/questions/197658/llamar-a-funcion-javascript-desde-un-string */
-static ExecuteFunction(functionName, context , args ) {
-  var args = Array.prototype.slice.call(arguments, 2);
-  var namespaces = functionName.split(".");
-  var func = namespaces.pop();
-  for(var i = 0; i < namespaces.length; i++) {
-    context = context[namespaces[i]];
-  }
-  return context[func].apply(context, args);
-}
+    /*source: https://es.stackoverflow.com/questions/197658/llamar-a-funcion-javascript-desde-un-string */
+    static ExecuteFunction(functionName, context, args) {
+        var args = Array.prototype.slice.call(arguments, 2);
+        var namespaces = functionName.split(".");
+        var func = namespaces.pop();
+        for (var i = 0; i < namespaces.length; i++) {
+            context = context[namespaces[i]];
+        }
+        return context[func].apply(context, args);
+    }
 
-static ExistFunction(class,method){
+    static ExistFunction(clase, method) {
 
-bool exist=true;/*temporal*/
+        var exist = true; /*temporal*/
 
 
-/*Miro si existe*/
+        /*Miro si existe*/
 
-return exist;
+        return exist;
 
-}
+    }
 
 
 
