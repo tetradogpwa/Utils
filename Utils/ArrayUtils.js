@@ -42,5 +42,12 @@ class ArrayUtils {
         }
         return value;
     }
+    static Filter(array, methodFilterSync) {
+        var filter = [];
+        for (var i = 0; i < array.length; i++)
+            if (methodFilterSync(array[i]))
+                ArrayUtils.Add(filter, array[i]);
+        return filter;
+    }
 
 }
