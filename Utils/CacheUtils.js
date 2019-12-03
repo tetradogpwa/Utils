@@ -7,9 +7,11 @@ class CacheUtils {
     static Set(nombreCache, key, value) {
         return CacheUtils.Remove(nombreCache, key).finally(() => {
             return caches.open(nombreCache).then((cache) => {
-
-                return cache.put((key instanceof Request) ? key : new Request(key), (value instanceof Response) ? value : new Response(value));
-
+                if (!(value instanceof Promise))
+                    value = Promise.resolve(value);
+                return value.then((v) => {
+                    return cache.put((key instanceof Request) ? key : new Request(key), (v instanceof Response) ? v : new Response(v));
+                });
 
             });
         });
@@ -20,8 +22,8 @@ class CacheUtils {
     static SetCss(nombreCache, key, strCss) {
         return CacheUtils.SetString(nombreCache, key, strCss, "text/css");
     }
-    static SetJson(nombreCache, key, strCss) {
-        return CacheUtils.SetString(nombreCache, key, strCss, "application/json");
+    static SetJson(nombreCache, key, strJson) {
+        return CacheUtils.SetString(nombreCache, key, strJson, "application/json");
     }
 
     static SetString(nombreCache, key, string, typeData = "text/plain") {
@@ -31,8 +33,11 @@ class CacheUtils {
     static Get(nombreCache, key) {
 
         return caches.open(nombreCache).then(cache => {
-
-            return cache.match((key instanceof Request) ? key : new Request(key));
+            if (!(key instanceof Promise))
+                key = Promise.resolve(key);
+            return key.then((k) => {
+                return cache.match((k instanceof Request) ? k : new Request(k));
+            });
         });
 
 
@@ -56,7 +61,12 @@ class CacheUtils {
         return CacheUtils.Delete(nombreCache, key);
     }
     static Delete(nombreCache, key) {
-        return caches.open(nombreCache).then((cache) => cache.delete((key instanceof Request) ? key : new Request(key)));
+        if (!(key instanceof Promise))
+            key = Promise.resolve(key);
+        return key.then((k) => {
+            return caches.open(nombreCache).then((cache) => cache.delete((k instanceof Request) ? k : new Request(k)));
+        });
+
     }
 
     static GetKeysRequest(nombreCache, toInclude = "") {
