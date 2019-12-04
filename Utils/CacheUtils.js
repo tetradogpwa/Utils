@@ -57,6 +57,21 @@ class CacheUtils {
 
     }
 
+    static GetAllJson(nombreCache, toInclude = '') {
+        return CacheUtils.GetKeys(nombreCache, toInclude).then((keys) => keys.map((k) => k.json()));
+    }
+    static GetAllCss(nombreCache, toInclude = '') {
+        return CacheUtils.GetAllString(nombreCache, toInclude);
+    }
+    static GetAllString(nombreCache, toInclude = '') {
+        return CacheUtils.GetKeys(nombreCache, toInclude).then((keys) => keys.map((k) => k.text()));
+    }
+
+    static GetAllByteArray(nombreCache, toInclude = '') {
+        return CacheUtils.GetAllString(nombreCache, toInclude).then((strs) => strs.map((str) => ByteArrayUtils.ToByteArray(str)));
+
+    }
+
     static Remove(nombreCache, key) {
         return CacheUtils.Delete(nombreCache, key);
     }
