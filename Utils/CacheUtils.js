@@ -83,6 +83,10 @@ class CacheUtils {
         });
 
     }
+    static Clear(nombreCache, toInclude = '') {
+        return Promise.all(CacheUtils.GetKeys(nombreCache, toInclude)
+            .then((keys) => keys.map((k) => CacheUtils.Remove(nombreCache, k))));
+    }
 
     static GetKeysRequest(nombreCache, toInclude = "") {
         return caches.open(nombreCache).then((cache) => cache.keys()).then((keys) => {
