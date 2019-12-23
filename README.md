@@ -4,6 +4,8 @@
 window._USER = "tetradogpwa";//tiene que ser el usuario/organización donde está el fork
 
 window._ROOTUTILS = "https://" + window._USER + ".github.io/Utils/";
+
+
 window.Import = (url) => {
 
     var scriptNode = document.createElement("script");
