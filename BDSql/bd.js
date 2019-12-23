@@ -185,7 +185,7 @@ class BD {
 
     }
     static BDsToZip(...bds) {
-        bdFiles = ArrayUtils.Root(bds).map((bd) => new FileZip(bd.Name + ".sqlite", bd.Export()));
+        var bdFiles = ArrayUtils.Root(bds).map((bd) => new FileZip(bd.Name + ".sqlite", bd.Export()));
         return ZipUtils.FileToZip(bdFiles);
     }
     static ZipToBDs(zipData) {
