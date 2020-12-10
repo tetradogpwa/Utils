@@ -58,6 +58,12 @@ class BD {
         this._name = name;
 
     }
+    GetColumns(table){
+        return this.Execute('select * from '+table+' limit 1;').then((result)=>result.columns);
+    }
+    GetTables(){
+        return this.Execute('SELECT name, sql FROM sqlite_master WHERE type="table"').then((result)=>result.values);
+    }
 
 
     //metodos cargar/guardar
