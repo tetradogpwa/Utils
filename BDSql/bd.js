@@ -61,14 +61,18 @@ class BD {
     GetColumns(table){
         return this.Execute('select * from '+table+' limit 1;').then((result)=>result.columns);
     }
+    GetDescTables(){
+        return this.Execute('SELECT name, sql FROM sqlite_master WHERE type="table"').then((result)=>result.values);
+    }
     GetTables(){
-        return this.Execute('SELECT name, sql FROM sqlite_master WHERE type="table"').then((result)=>{
+        return this.GetDescTables.then((result)=>{
            var tablas=[];
-           for(var i=0;i< result.values.length;i++)
-            tablas.push(result.values[0][0]);//tiene una columna
+           for(var i=0;i< result.length;i++)
+            tablas.push(result[0][0]);//tiene una columna
             return tablas;
         });
     }
+   
 
 
     //metodos cargar/guardar
