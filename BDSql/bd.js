@@ -113,7 +113,7 @@ class BD {
         return Promise.resolve(this._bd.export());
     }
     ImportUrl(urlBD) {
-        return fetch(urlBD).then(d => d.blob()).then(this.Import);
+        return fetch(urlBD).then(d => d.blob()).then((d)=>this.Import(d));
     }
     Import(dataBD) {
         return initSqlJs().then(SQL => {
