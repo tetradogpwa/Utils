@@ -61,6 +61,9 @@ class BD {
     GetColumns(table){
         return this.Execute('select * from '+table+' limit 1;').then((result)=>result.columns);
     }
+    GetDescTable(table){
+        return this.Execute('SELECT name, sql FROM sqlite_master WHERE type="table" and name="'+table+'"').then((result)=>result.values[1]);
+    }
     GetDescTables(){
         return this.Execute('SELECT name, sql FROM sqlite_master WHERE type="table"').then((result)=>result.values);
     }
