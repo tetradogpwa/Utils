@@ -204,7 +204,7 @@ class BD {
         return ZipUtils.ZipToFiles(zipData).then((files) => files.map((file) => BD.FromData(file.FileName, file.Data)));
 
     }
-    static BDFromData(name, dataSQLite) {
+    static FromData(name, dataSQLite) {
         var bd = new BD();
         bd.Init = bd.Init.then(() => {
             bd.Name = name;
@@ -212,11 +212,11 @@ class BD {
         });
         return bd;
     }
-    static BDFromURL(name, urlBD) {
+    static FromUrl(name, urlBD) {
         var bd = new BD();
         bd.Init = bd.Init.then(() => {
             bd.Name = name;
-            return bd.ImportURL(urlBD);
+            return bd.ImportUrl(urlBD);
         });
         return bd;
     }
