@@ -15,20 +15,18 @@ class BD {
 
     constructor(idBD = "") {
 
-            this.IdBD = idBD;
+        this.IdBD = idBD;
 
-            if (this.IdBD != "") {
-                this.Init = this.Load(this.IdBD);
-            } else {
-                this.Init = initSqlJs().then(SQL => {
-                    this._bd = new SQL.Database();
-                    this.IdBD = BD.Header + new Date().getTime();
-                    return this;
-
-                });
-            }
+        if (this.IdBD != "") {
+            this.Init = this.Load(this.IdBD);
+        } else {
+            this.Init = initSqlJs().then(SQL => {
+                this._bd = new SQL.Database();
+                this.IdBD = BD.Header + new Date().getTime();
+            });
         }
-        //static properties
+    }
+    //static properties
     static get Header() {
         if (!BD._Header)
             BD._Header = "BDSQL";
@@ -58,44 +56,39 @@ class BD {
         this._name = name;
 
     }
-    GetColumns(table){
-        return this.Execute('select * from '+table+' limit 1;').then((result)=>result.columns);
+    GetColumns(table) {
+        return this.Execute('select * from ' + table).then((result) => result.columns);
     }
-    GetDescTable(table){
-        return this.Execute('SELECT name, sql FROM sqlite_master WHERE type="table" and name="'+table+'"').then((result)=>result.values[1]);
+    GetDescTable(table) {
+        return this.Execute('SELECT name, sql FROM sqlite_master WHERE type="table" and name="' + table + '"').then((result) => result.values[1]);
     }
-    GetDescTables(){
-        return this.Execute('SELECT name, sql FROM sqlite_master WHERE type="table"').then((result)=>result.values);
+    GetDescTables() {
+        return this.Execute('SELECT name, sql FROM sqlite_master WHERE type="table"').then((result) => result.values);
     }
-    GetTables(){
-        return this.GetDescTables().then((result)=>{
-           var tablas=[];
-           for(var i=0;i< result.length;i++)
-            tablas.push(result[0][0]);//tiene una columna
+    GetTables() {
+        return this.GetDescTables().then((result) => {
+            var tablas = [];
+            for (var i = 0; i < result.length; i++)
+                tablas.push(result[0][i]);//tiene una columna
             return tablas;
         });
     }
-   
+
 
 
     //metodos cargar/guardar
     Load(idBD) {
-        return new Promise((okey, error) => {
-            CacheUtils.GetByteArray(BD.CacheData, idBD)
-                .then((data) => {
+        return CacheUtils.GetByteArray(BD.CacheData, idBD)
+            .then(this.Import)
+            .then(() => CacheUtils.GetString(BD.CacheName, idBD))
+            .then((name) => {
+                this.Name = name;
+            })
 
-                    this.Import(data);
-                })
-                .then(() => { return CacheUtils.GetString(BD.CacheName, idBD); })
-                .then((name) => {
-                    this.Name = name;
-                    okey(this);
-                })
-
-            .catch(() => error("imposible load id='" + this.IdBD + "' not found."));
+            .catch(() => new Error("imposible load id='" + this.IdBD + "' not found."));
 
 
-        });
+
 
 
     }
@@ -117,24 +110,25 @@ class BD {
         });
     }
     Export() {
-        return new Promise((okey, error) => okey(this._bd.export()).catch(error));
+        return Promise.resolve(this._bd.export());
     }
-
+    ImportUrl(urlBD) {
+        return fetch(urlBD).then(d => d.blob()).then(this.Import);
+    }
     Import(dataBD) {
-        return new Promise((okey, error) => initSqlJs().then(SQL => {
+        return initSqlJs().then(SQL => {
             this._bd = new SQL.Database(dataBD);
-            okey(this);
-        }).catch(error));
+        });
     }
 
     ExecuteURL(url, args, tratarRespuestaFetch = (r) => r.text()) {
-            return fetch(url).then((result) => {
-                if (result.ok)
-                    return tratarRespuestaFetch(result);
-                else throw "No se puede obtener url=" + url;
-            }).then((data) => this.Execute(data, args));
-        }
-        //SQL
+        return fetch(url).then((result) => {
+            if (result.ok)
+                return tratarRespuestaFetch(result);
+            else throw "No se puede obtener url=" + url;
+        }).then((data) => this.Execute(data, args));
+    }
+    //SQL
     Execute(strSQL, ...args) {
         return new Promise((okey, error) => okey(this._bd.exec(StringUtils.Format(strSQL, args))).catch(error));
     }
@@ -158,17 +152,17 @@ class BD {
         return this.Run("drop table " + tableName + ";");
     }
     Clone() {
-            return new Promise((okey, error) => {
-                var clon = new BD();
-                clon.Init.then(() => this.Export().then((data) => clon.Import(data))
-                    .then(() => {
-                        clon.Name = this.Name + "_Clon";
-                        okey(clon);
-                    })).catch(error);
+        return new Promise((okey, error) => {
+            var clon = new BD();
+            clon.Init.then(() => this.Export().then((data) => clon.Import(data))
+                .then(() => {
+                    clon.Name = this.Name + "_Clon";
+                    okey(clon);
+                })).catch(error);
 
-            });
-        }
-        //cargar/guardar
+        });
+    }
+    //cargar/guardar
     static LoadAll() {
         return new Promise((okey, error) => {
             CacheUtils.GetKeys(BD.CacheData, BD.Header).then((keysFiltradas) => {
@@ -215,6 +209,14 @@ class BD {
         bd.Init = bd.Init.then(() => {
             bd.Name = name;
             bd.Import(dataSQLite);
+        });
+        return bd;
+    }
+    static BDFromURL(name, urlBD) {
+        var bd = new BD();
+        bd.Init = bd.Init.then(() => {
+            bd.Name = name;
+            return bd.ImportURL(urlBD);
         });
         return bd;
     }
