@@ -208,7 +208,7 @@ class BD {
         var bd = new BD();
         bd.Init = bd.Init.then(() => {
             bd.Name = name;
-            bd.Import(dataSQLite);
+            return bd.Import(dataSQLite);
         });
         return bd;
     }
