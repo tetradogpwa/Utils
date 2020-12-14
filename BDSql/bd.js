@@ -3,6 +3,7 @@ window.Import(window._ROOTUTILS + "Utils/CacheUtils.js");
 window.Import(window._ROOTUTILS + "Utils/StringUtils.js");
 window.Import(window._ROOTUTILS + "Utils/ArrayUtils.js");
 window.Import(window._ROOTUTILS + "BDSql/sql-wasm.js");
+window.Import(window._ROOTUTILS + "BDSql/Result.js");
 window.Import(window._ROOTUTILS + "Utils/ZipUtils.js");
 
 
@@ -57,11 +58,11 @@ class BD {
 
     }
     GetColumns(table) {
-        return this.Execute('select * from ' + table).then((result) => new Result(result).Columns);
+        return this.Execute('select * from ' + table).then((result) => result.Columns);
     }
     GetTables() {
         return this.Execute('SELECT name FROM sqlite_master').then((result) => {
-            return new Result(result).Values;
+            return result.Values;
         });
     }
 
@@ -121,7 +122,7 @@ class BD {
     }
     //SQL
     Execute(strSQL, ...args) {
-        return new Promise((okey, error) => okey(this._bd.exec(StringUtils.Format(strSQL, args))).catch(error));
+        return Promise.resolve(this._bd.exec(StringUtils.Format(strSQL, args))).then(r=>new Result(r));
     }
 
     Run(strSQL, ...args) {
@@ -224,28 +225,5 @@ class BD {
     }
 
 
-    //string result part
-    static ResultToString(result) {
-        var text = "\n";
-        if (result.length != 0) {
-            for (var j = 0; j < result.length; j++) {
-                text += j + ":" + BD._filaToString(result[j].columns);
-                for (var i = 0; i < result[j].values.length; i++)
-                    text += BD._filaToString(result[j].values[i]);
-            }
-        } else text = "No result from SQLite!";
-
-        return text;
-    }
-
-    static _filaToString(array) {
-        var fila = "\n";
-        for (var i = 0; i < array.length; i++) {
-            fila += "\t" + array[i];
-        }
-        fila += "\n";
-
-        return fila;
-    }
 
 }
