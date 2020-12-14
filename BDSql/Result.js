@@ -2,30 +2,30 @@ class Result{
 
  construct(result){
 
- this._columns=result.columns;
-this._values=result.values;
+ this._columns=result[0].columns;
+this._values=result;
 this._index=-1;
 
 
 }
-get function Columns(){
+get Columns(){
 return this._columns;
 }
 
-get function Values(){
+get Values(){
 
 return this._values;
 }
-get function Index(){
+get Index(){
 return this._index;
 }
-get function Count(){
+get Count(){
 
 return this.Values.length;
 
 
 }
-function FetchArray(index = -1){
+FetchArray(index = -1){
 
 var array=undefinded;
 if(index<0){
@@ -41,7 +41,7 @@ array=this.Values[index];
 return array;
 
 }
-function FetchAssoc(index = -1){
+FetchAssoc(index = -1){
 var array=this.FetchArray(index);
 var dic=undefinded;
 if(array != undefinded){
@@ -54,13 +54,38 @@ dic[this.Columns[i]]=array[i];
 return dic;
 
 }
-function FetchDic(index = -1){
+FetchDic(index = -1){
 return this.FetchAssoc(index);
 }
-function Reset(){
+Reset(){
 this._index=-1;
 
 }
+
+toString(){
+var text = "\n";
+        if (this.Count != 0) {
+            for (var j = 0; j < this.Count; j++) {
+                text += j + ":" + Result._filaToString(this.Columns);
+                for (var i = 0; i < this.Columns.length; i++)
+                    text += Result._filaToString(thia.Values[i]);
+            }
+        } else text = "No result from SQLite!";
+
+        return text;
+}
+ 
+
+    static _filaToString(array) {
+        var fila = "\n";
+        for (var i = 0; i < array.length; i++) {
+            fila += "\t" + array[i];
+        }
+        fila += "\n";
+
+        return fila;
+    }
+
 
 
 }
