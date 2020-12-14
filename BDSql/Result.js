@@ -8,9 +8,20 @@ this._index=-1;
 
 
 }
+get function Columns(){
+return this._columns;
+}
+
+get function Values(){
+
+return this._values;
+}
+get function Index(){
+return this._index;
+}
 get function Count(){
 
-return this._values.length;
+return this.Values.length;
 
 
 }
@@ -24,7 +35,7 @@ index=++this._index;
 }
 if(index<this.Count){
 
-array=this._values[index];
+array=this.Values[index];
 
 }
 return array;
@@ -35,13 +46,16 @@ var array=this.FetchArray(index);
 var dic=undefinded;
 if(array != undefinded){
 dic={};
-for(var i=0,f=this._columns.length;i<f;i++){
-dic[this._columns[i]]=array[i];
+for(var i=0,f=this.Columns.length;i<f;i++){
+dic[this.Columns[i]]=array[i];
 }
 
 }
 return dic;
 
+}
+function FetchDic(index = -1){
+return this.FetchAssoc(index);
 }
 function Reset(){
 this._index=-1;
