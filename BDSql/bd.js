@@ -57,20 +57,11 @@ class BD {
 
     }
     GetColumns(table) {
-        return this.Execute('select * from ' + table).then((result) => result.columns);
-    }
-    GetDescTable(table) {
-        return this.Execute('SELECT name, sql FROM sqlite_master WHERE type="table" and name="' + table + '"').then((result) => result.values[1]);
-    }
-    GetDescTables() {
-        return this.Execute('SELECT name, sql FROM sqlite_master WHERE type="table"').then((result) => result.values);
+        return this.Execute('select * from ' + table).then((result) => new Result(result).Columns);
     }
     GetTables() {
-        return this.GetDescTables().then((result) => {
-            var tablas = [];
-            for (var i = 0; i < result.length; i++)
-                tablas.push(result[0][i]);//tiene una columna
-            return tablas;
+        return this.Execute('SELECT name FROM sqlite_master').then((result) => {
+            return new Result(result).Values;
         });
     }
 
