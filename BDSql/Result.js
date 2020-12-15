@@ -3,7 +3,7 @@ class Result{
  construct(result){
 
  this._columns=result[0].columns;
-this._values=result;
+this._values=result.map(r=>r.values);
 this._index=-1;
 
 
